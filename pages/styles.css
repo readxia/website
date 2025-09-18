@@ -1,15 +1,17 @@
 body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    text-align: center;
-  }
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content towards the top */
+  align-items: center; /* Center content horizontally */
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+}
   
   h1 {
     font-size: 4rem;
@@ -44,27 +46,34 @@ body {
   }
 
   nav {
-    background-color: #333;
-    padding: 10px;
+    top: 0;
+    background-color: #333; /* Ensure the background color covers the content */
+    z-index: 1000; /* Ensure it stays above other elements */
+    padding: 10px 0; /* Add some padding for spacing */
+    max-width: 1200px; /* Set the maximum width of the navbar */
+    margin: 0 auto; /* Center the navbar block horizontally */
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
 }
 
 nav ul li {
-    display: inline;
+  flex: 1; /* Make each item take up an equal amount of space */
+  text-align: center; /* Center the text inside each section */
 }
 
 nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    display: block;
+  color: white;
+  text-decoration: none;
+  padding: 1em 5em; /* Use relative units for padding */
+  font-size: 1.5em; /* Scale font size relative to the navbar */
+  display: block;
+  text-align: center; /* Center the text inside the button */
 }
 
 nav ul li a:hover {
