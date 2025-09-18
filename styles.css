@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+  }
+  
+  p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+  }
+  
+  button {
+    background: #fff;
+    color: #2a5298;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+  
+  button:hover {
+    background: #2a5298;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+  }
+  
