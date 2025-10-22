@@ -22,15 +22,24 @@
   <p>
     we went to china and taiwan lol
   </p>
-  <!-- Image examples -->
-  <h2>Feature photo</h2>
-  <img class="img-large lightbox-trigger" src="https://i.ibb.co/0sYh3fV/china-feature.jpg" alt="Great Wall feature">
+  <!-- Image examples organized by day (images lazy-load when the day is opened) -->
+  <h2>Trip photos by day</h2>
 
-  <h2>Side-by-side smaller images</h2>
-  <div class="img-row">
-    <img class="img-small lightbox-trigger" src="https://i.ibb.co/3mXb1Kp/china-small1.jpg" alt="Market street">
-    <img class="img-small lightbox-trigger" src="https://i.ibb.co/4d2Yk9W/china-small2.jpg" alt="Night food">
-  </div>
+  <details class="day" id="day-1">
+    <summary>Day 1 — Great Wall & arrival</summary>
+    <p>Arrived in Beijing and visited the Great Wall.</p>
+    <!-- placeholder tiny pixel used until image loads -->
+    <img class="img-large lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/0sYh3fV/china-feature.jpg" alt="Great Wall feature" loading="lazy">
+  </details>
+
+  <details class="day" id="day-2">
+    <summary>Day 2 — Markets & night food</summary>
+    <p>Explored local markets and tried street food.</p>
+    <div class="img-row">
+      <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/3mXb1Kp/china-small1.jpg" alt="Market street" loading="lazy">
+      <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/4d2Yk9W/china-small2.jpg" alt="Night food" loading="lazy">
+    </div>
+  </details>
 
   <!-- Lightbox markup -->
   <div id="lightbox" aria-hidden="true">
@@ -40,9 +49,7 @@
   </div>
 
   <script>
-    // Simple lightbox: click any .lightbox-trigger to open larger
     (function(){
-      const triggers = document.querySelectorAll('.lightbox-trigger');
       const lb = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightbox-img');
       const lbClose = document.getElementById('lightbox-close');
@@ -60,9 +67,31 @@
         document.body.style.overflow = '';
       }
 
-      triggers.forEach(t=> t.addEventListener('click', e=>{
+      // Delegated lightbox: works for images loaded later
+      document.addEventListener('click', function(e){
+        const t = e.target.closest && e.target.closest('.lightbox-trigger');
+        if(!t) return;
+        // ensure image is loaded (in case data-src still present)
+        if(t.dataset && t.dataset.src && (!t.src || t.src.startsWith('data:image/gif'))){
+          t.src = t.dataset.src;
+          delete t.dataset.src;
+        }
         open(t.src, t.alt);
-      }));
+      });
+
+      // Lazy-load images inside a day when the <details> is opened
+      const days = document.querySelectorAll('details.day');
+      days.forEach(day => {
+        day.addEventListener('toggle', () => {
+          if(!day.open) return; // only when opened
+          const imgs = day.querySelectorAll('img[data-src]');
+          imgs.forEach(img => {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          });
+        });
+      });
+
       lbClose.addEventListener('click', close);
       backdrop.addEventListener('click', close);
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
