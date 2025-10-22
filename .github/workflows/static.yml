@@ -37,7 +37,12 @@ jobs:
         run: |
           rm -rf deploy
           mkdir -p deploy
-          if [ -d pages ]; then cp -r pages deploy/; fi
+          # copy the contents of pages into deploy root so index.html is at artifact root
+          if [ -d pages ]; then
+            # include dotfiles
+            shopt -s dotglob || true
+            cp -r pages/. deploy/
+          fi
           if [ -d assets ]; then cp -r assets deploy/; fi
 
       - name: Upload artifact
