@@ -88,6 +88,54 @@ img {
   margin: 1rem 0;
   display: block;
 }
+/* Lightbox styles */
+#lightbox {
+  display: none; /* shown via JS */
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+#lightbox[aria-hidden="false"] {
+  display: flex;
+}
+#lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(4px);
+}
+#lightbox-img {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 3002;
+}
+#lightbox-close {
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+  z-index: 3003;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  color: #222;
+  font-size: 1.1rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+#lightbox-close:hover { transform: scale(1.05); }
+
+@media (max-width: 600px) {
+  #lightbox-img { max-width: 95vw; max-height: 80vh; }
+  #lightbox-close { right: 0.75rem; top: 0.75rem; padding: 5px 8px; }
+}
 /* Image utility classes for the travel blog */
 .img-large {
   width: 50vw; /* large images take ~50% of viewport width */
