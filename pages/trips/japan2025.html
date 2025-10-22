@@ -26,12 +26,14 @@
   <details class="day" id="jp-day-1">
     <summary>Day 1 — Arrival & Sapporo</summary>
     <p>Landed in Sapporo and wandered around the city.</p>
-    <img class="img-large lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/S7ByzPH5/DSCF0519.jpg" alt="Hotel selfie" loading="lazy">
+    <img class="img-large lightbox-trigger" src="../../assets/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/S7ByzPH5/DSCF0519.jpg" alt="Hotel selfie" loading="lazy">
   </details>
   <!-- Lightbox markup -->
   <div id="lightbox" aria-hidden="true">
     <div id="lightbox-backdrop"></div>
-    <img id="lightbox-img" src="" alt="">
+    <div id="lightbox-inner">
+      <img id="lightbox-img" src="" alt="">
+    </div>
     <button id="lightbox-close" aria-label="Close">✕</button>
   </div>
 
@@ -43,6 +45,9 @@
       const backdrop = document.getElementById('lightbox-backdrop');
 
       function open(src, alt){
+        lbImg.dataset.zoomed = 'false';
+        lbImg.style.width = '';
+        lbImg.style.height = '';
         lbImg.src = src;
         lbImg.alt = alt || '';
         lb.style.display = 'flex';
@@ -51,6 +56,9 @@
       function close(){
         lb.style.display = 'none';
         lbImg.src = '';
+        lbImg.dataset.zoomed = 'false';
+        lbImg.style.width = '';
+        lbImg.style.height = '';
         document.body.style.overflow = '';
       }
 
@@ -81,6 +89,16 @@
 
       lbClose.addEventListener('click', close);
       backdrop.addEventListener('click', close);
+      lbImg.addEventListener('click', function(){
+        const isZoomed = lbImg.dataset.zoomed === 'true';
+        if(!isZoomed){
+          lbImg.dataset.zoomed = 'true';
+          lbImg.style.width = Math.min(lbImg.naturalWidth, window.innerWidth * 2) + 'px';
+        } else {
+          lbImg.dataset.zoomed = 'false';
+          lbImg.style.width = '';
+        }
+      });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
     })();
   </script>
@@ -91,6 +109,7 @@
     <div class="img-row">
       <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/XYZ/japan-small1.jpg" alt="Scenic view" loading="lazy">
       <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/XYZ/japan-small2.jpg" alt="Hot spring" loading="lazy">
+      <img href="../../assets/thumbnails/hotelselfiethumbnail.webp">
     </div>
   </details>
 </body>

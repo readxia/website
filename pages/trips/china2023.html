@@ -44,7 +44,9 @@
   <!-- Lightbox markup -->
   <div id="lightbox" aria-hidden="true">
     <div id="lightbox-backdrop"></div>
-    <img id="lightbox-img" src="" alt="">
+    <div id="lightbox-inner">
+      <img id="lightbox-img" src="" alt="">
+    </div>
     <button id="lightbox-close" aria-label="Close">✕</button>
   </div>
 
@@ -56,6 +58,9 @@
       const backdrop = document.getElementById('lightbox-backdrop');
 
       function open(src, alt){
+        lbImg.dataset.zoomed = 'false';
+        lbImg.style.width = '';
+        lbImg.style.height = '';
         lbImg.src = src;
         lbImg.alt = alt || '';
         lb.style.display = 'flex';
@@ -64,6 +69,9 @@
       function close(){
         lb.style.display = 'none';
         lbImg.src = '';
+        lbImg.dataset.zoomed = 'false';
+        lbImg.style.width = '';
+        lbImg.style.height = '';
         document.body.style.overflow = '';
       }
 
@@ -94,6 +102,18 @@
 
       lbClose.addEventListener('click', close);
       backdrop.addEventListener('click', close);
+      // Toggle zoom on image click: enlarge by setting natural size > viewport and allow scrolling
+      lbImg.addEventListener('click', function(){
+        const isZoomed = lbImg.dataset.zoomed === 'true';
+        if(!isZoomed){
+          lbImg.dataset.zoomed = 'true';
+          // set larger width (natural width or 200% of container) while keeping height auto
+          lbImg.style.width = Math.min(lbImg.naturalWidth, window.innerWidth * 2) + 'px';
+        } else {
+          lbImg.dataset.zoomed = 'false';
+          lbImg.style.width = '';
+        }
+      });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
     })();
   </script>

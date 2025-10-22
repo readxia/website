@@ -116,6 +116,19 @@ img {
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   z-index: 3002;
 }
+
+/* inner wrapper so zoomed images can be panned (scroll) */
+#lightbox-inner {
+  z-index: 3002;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow: auto;
+  border-radius: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+#lightbox-img { cursor: zoom-in; }
+#lightbox-img[data-zoomed="true"] { cursor: zoom-out; }
 #lightbox-close {
   position: absolute;
   right: 1.25rem;
