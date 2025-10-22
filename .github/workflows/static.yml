@@ -33,13 +33,18 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Prepare deploy folder
+        run: |
+          rm -rf deploy
+          mkdir -p deploy
+          if [ -d pages ]; then cp -r pages deploy/; fi
+          if [ -d assets ]; then cp -r assets deploy/; fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload pages and assets so images and other static files are deployed
-          path: |
-            ./pages
-            ./assets
+          # Upload the prepared deploy folder
+          path: './deploy'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
