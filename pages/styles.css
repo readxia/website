@@ -170,4 +170,27 @@ img {
   .img-row { flex-direction: column; align-items: center; }
   .img-small { width: 80%; margin: 0.5rem 0; }
 }
+
+/* Big, clickable summary (dropdown) styles */
+details.day summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 18px;
+  background: linear-gradient(90deg,#2a5298,#1e3c72);
+  color: white;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 1rem auto;
+  max-width: 900px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  display: inline-block;
+}
+details.day summary::-webkit-details-marker { display:none; }
+details.day[open] summary { transform: translateY(1px); box-shadow: 0 6px 18px rgba(0,0,0,0.3) inset; }
+
+/* Make the summary responsive on small screens */
+@media (max-width: 600px) {
+  details.day summary { width: 92%; padding: 12px 14px; font-size: 1rem; }
+}
   
