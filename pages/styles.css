@@ -206,4 +206,32 @@ details.day[open] summary { transform: translateY(1px); box-shadow: 0 6px 18px r
 @media (max-width: 600px) {
   details.day summary { width: 92%; padding: 12px 14px; font-size: 1rem; }
 }
+
+/* Trip list link styles */
+.trip-list { display: flex; flex-direction: column; gap: 14px; align-items: center; margin-top: 20px; }
+.trip-link {
+  display: inline-block;
+  width: 90%;
+  max-width: 720px;
+  text-align: center;
+  padding: 18px 20px;
+  background: linear-gradient(90deg,#ffffff, #f0f0f5);
+  color: #1e3c72;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.trip-link:hover, .trip-link:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+  outline: none;
+}
+.trip-link:active { transform: translateY(-1px) scale(0.995); }
+
+@media (max-width: 480px) {
+  .trip-link { padding: 14px 16px; font-size: 1rem; width: 94%; }
+}
   
