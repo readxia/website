@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>rojo's page</title>
+  <!-- Import Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- Navbar -->
+  <nav>
+    <ul>
+  <li><a href="../index.html">Home</a></li>
+  <li><a href="../travel.html">Travel</a></li>
+  <li><a href="../misc.html">Misc</a></li>
+    </ul>
+  </nav>
+  <h1>China 2023 (and some Taiwan)</h1>
+  <p>
+    we went to china and taiwan lol
+  </p>
+  <!-- Image examples organized by day (images lazy-load when the day is opened) -->
+  <h2>Trip photos by day</h2>
+
+  <details class="day" id="day-1">
+    <summary>Day 1 — Great Wall & arrival</summary>
+    <p>Arrived in Beijing and visited the Great Wall.</p>
+    <!-- placeholder tiny pixel used until image loads -->
+  <img class="img-large lightbox-trigger" src="../assets/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/0sYh3fV/china-feature.jpg" alt="Great Wall feature" loading="lazy">
+  </details>
+
+  <details class="day" id="day-2">
+    <summary>Day 2 — Markets & night food</summary>
+    <p>Explored local markets and tried street food.</p>
+    <div class="img-row">
+  <img class="img-small lightbox-trigger" src="../assets/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/3mXb1Kp/china-small1.jpg" alt="Market street" loading="lazy">
+      <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/4d2Yk9W/china-small2.jpg" alt="Night food" loading="lazy">
+    </div>
+  </details>
+
+  <!-- Lightbox markup -->
+  <div id="lightbox" aria-hidden="true">
+    <div id="lightbox-backdrop"></div>
+    <div id="lightbox-inner">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <button id="lightbox-close" aria-label="Close">✕</button>
+  </div>
+
+  <script>
+    (function(){
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      const lbClose = document.getElementById('lightbox-close');
+      const backdrop = document.getElementById('lightbox-backdrop');
+
+      function open(src, alt){
+        lbImg.dataset.zoomed = 'false';
+        lbImg.style.width = '';
+        lbImg.style.height = '';
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+      function close(){
+        lb.style.display = 'none';
+        lbImg.src = '';
+        lbImg.dataset.zoomed = 'false';
+        lbImg.style.width = '';
+        lbImg.style.height = '';
+        document.body.style.overflow = '';
+      }
+
+      // Delegated lightbox: works for images loaded later
+      document.addEventListener('click', function(e){
+        const t = e.target.closest && e.target.closest('.lightbox-trigger');
+        if(!t) return;
+        // ensure image is loaded (in case data-src still present)
+        if(t.dataset && t.dataset.src && (!t.src || t.src.startsWith('data:image/gif'))){
+          t.src = t.dataset.src;
+          delete t.dataset.src;
+        }
+        open(t.src, t.alt);
+      });
+
+      // Lazy-load images inside a day when the <details> is opened
+      const days = document.querySelectorAll('details.day');
+      days.forEach(day => {
+        day.addEventListener('toggle', () => {
+          if(!day.open) return; // only when opened
+          const imgs = day.querySelectorAll('img[data-src]');
+          imgs.forEach(img => {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          });
+        });
+      });
+
+      lbClose.addEventListener('click', close);
+      backdrop.addEventListener('click', close);
+      // Toggle zoom on image click: use CSS transform (scale) for consistent aspect
+      lbImg.addEventListener('click', function(){
+        const inner = document.getElementById('lightbox-inner');
+        const isZoomed = inner.classList.contains('zoomed');
+        if(!isZoomed) inner.classList.add('zoomed');
+        else inner.classList.remove('zoomed');
+      });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    })();
+  </script>
+  <script>
+    // Navbar shrink on scroll
+    (function(){
+      const nav = document.querySelector('nav');
+      function onScroll(){
+        if(window.scrollY > 60) nav.classList.add('nav-shrink');
+        else nav.classList.remove('nav-shrink');
+      }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
+  </script>
+</body>
+</html>

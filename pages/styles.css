@@ -54,7 +54,7 @@ body {
     top: 18px;
     background-color: rgba(51,51,51,0.9); /* semi-transparent dark */
     z-index: 1000; /* Ensure it stays above other elements */
-    padding: 14px 0; /* Add some padding for spacing */
+    padding: 8px 0; /* Add some padding for spacing */
     width: calc(100% - 48px);
     border-radius: 12px;
     margin: 0 24px 18px 24px; /* centered with side margins */
@@ -90,8 +90,8 @@ nav ul li a:hover {
 
 /* Shrunken navbar when user scrolls */
 .nav-shrink {
-  padding: 8px 0 !important;
-  border-radius: 8px !important;
+  padding: 2px 0 !important;
+  border-radius: 2px !important;
 }
 
 /* page main container to control layout */

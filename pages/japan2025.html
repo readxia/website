@@ -7,7 +7,7 @@
   <!-- Import Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <!-- Link to external stylesheet -->
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!-- Navbar -->
@@ -18,28 +18,31 @@
   <li><a href="../misc.html">Misc</a></li>
     </ul>
   </nav>
-  <h1>China 2023 (and some Taiwan)</h1>
-  <p>
-    we went to china and taiwan lol
+  <h1>Japan 2025</h1>
+  <p>Our plan this trip was to explore Hokkaido. We will fly into Tokyo and stay a few nights, then fly into Hakodate (Hokkaido) 
+    Though we land in Tokyo and this is Bella's first time in Japan,
+    we will try to explore Tokyo beginning and end of the trip.
   </p>
-  <!-- Image examples organized by day (images lazy-load when the day is opened) -->
+
+  <img class="img-large" src="../assets/japan2025/itinerary.png" alt="Hokkaido Itinerary">
+
   <h2>Trip photos by day</h2>
 
-  <details class="day" id="day-1">
-    <summary>Day 1 — Great Wall & arrival</summary>
-    <p>Arrived in Beijing and visited the Great Wall.</p>
-    <!-- placeholder tiny pixel used until image loads -->
-  <img class="img-large lightbox-trigger" src="../assets/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/0sYh3fV/china-feature.jpg" alt="Great Wall feature" loading="lazy">
+  <details class="day" id="jp-day-1">
+    <summary>Day 1 — Arrival & Sapporo</summary>
+    <p>Landed in Sapporo and wandered around the city.</p>
+  <img class="img-large lightbox-trigger" src="../assets/japan2025/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/S7ByzPH5/DSCF0519.jpg" alt="Hotel selfie" loading="lazy">
   </details>
 
-  <details class="day" id="day-2">
-    <summary>Day 2 — Markets & night food</summary>
-    <p>Explored local markets and tried street food.</p>
+  <details class="day" id="jp-day-2">
+    <summary>Day 2 — Nature & Hot Springs</summary>
+    <p>Visited a hot spring and some scenic places.</p>
     <div class="img-row">
-  <img class="img-small lightbox-trigger" src="../assets/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/3mXb1Kp/china-small1.jpg" alt="Market street" loading="lazy">
-      <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="https://i.ibb.co/4d2Yk9W/china-small2.jpg" alt="Night food" loading="lazy">
+  <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="../assets/japan2025/thumbnails/hotelselfiethumbnail.webp" alt="Scenic view" loading="lazy">
+  <img class="img-small lightbox-trigger" src="../assets/japan2025/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/XYZ/japan-small2.jpg" alt="Hot spring" loading="lazy">
     </div>
   </details>
+
 
   <!-- Lightbox markup -->
   <div id="lightbox" aria-hidden="true">
@@ -100,14 +103,15 @@
         });
       });
 
-      lbClose.addEventListener('click', close);
-      backdrop.addEventListener('click', close);
-      // Toggle zoom on image click: use CSS transform (scale) for consistent aspect
+      lbClose.addEventListener('click', function(){
+        // reset zoom when closing
+        document.getElementById('lightbox-inner').classList.remove('zoomed');
+        close();
+      });
+      backdrop.addEventListener('click', function(){ document.getElementById('lightbox-inner').classList.remove('zoomed'); close(); });
       lbImg.addEventListener('click', function(){
         const inner = document.getElementById('lightbox-inner');
-        const isZoomed = inner.classList.contains('zoomed');
-        if(!isZoomed) inner.classList.add('zoomed');
-        else inner.classList.remove('zoomed');
+        inner.classList.toggle('zoomed');
       });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
     })();
