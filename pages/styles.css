@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   justify-content: flex-start; /* Align content towards the top */
   align-items: center; /* Center content horizontally */
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  background: linear-gradient(135deg, #494d54, #2e3136);
   color: #fff;
   font-family: 'Orbitron', sans-serif;
   text-align: center;
