@@ -1,5 +1,5 @@
 body {
-  padding-top: 0px;
+  padding-top: 60px;
   padding-bottom: 100px;
   margin: 0;
   min-height: 100vh;
@@ -16,9 +16,9 @@ body {
 }
   
   h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    text-shadow: 0 0 10px rgba(210, 210, 210, 0.8);
   }
   
   p {
@@ -26,7 +26,7 @@ body {
     /* width similar to .img-large on wide screens */
     width: min(50vw, 900px);
     max-width: 90ch;
-    margin: 0 auto 30px;
+    margin: 15px;
     line-height: 1.6;
   }
   
@@ -49,58 +49,48 @@ body {
     box-shadow: 0 0 15px rgba(255,255,255,0.6);
   }
 
-  nav {
-    position: sticky;
-    top: 18px;
-    background-color: rgba(51,51,51,0.9); /* semi-transparent dark */
-    z-index: 1000; /* Ensure it stays above other elements */
-    padding: 8px; /* Add some padding for spacing */
-    width: calc(100% - 48px);
-    border-radius: 12px;
-    margin: 0px 24px 18px 24px; /* centered with side margins */
-    backdrop-filter: blur(6px);
+nav {
+  background-color: #222;          /* dark theme background */
+  color: #fff;                     /* white text */
+  padding: 0.75rem 2rem;           /* space around links */
+  display: flex;
+  justify-content: center;         /* center the <ul> */
+  align-items: center;
+  top: 0;
+  width: 100%;
+  z-index: 1000;                   /* stay above images */
 }
 
+/* Remove list styles */
 nav ul {
-  list-style-type: none;
+  list-style: none;
+  display: flex;
+  gap: 3rem;                       /* space between links */
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: space-between; /* Distribute items evenly */
 }
 
-nav ul li {
-  flex: 1; /* Make each item take up an equal amount of space */
-  text-align: center; /* Center the text inside each section */
-}
-
-nav ul li a {
-  color: white;
+/* Link styles */
+nav a {
+  color: #fff;
   text-decoration: none;
-  padding: 0.6em 1.2em; /* Use relative units for padding */
-  font-size: 1.05em; /* Scale font size relative to the navbar */
-  transition: padding 180ms ease, font-size 180ms ease, background-color 160ms ease;
-  display: block;
-  text-align: center; /* Center the text inside the button */
+  font-weight: 600;
+  font-size: 1.5rem;
+  transition: color 0.2s ease;
 }
 
-nav ul li a:hover {
-    background-color: #575757;
-    border-radius: 5px;
+/* Hover and active effects */
+nav a:hover {
+  color: #f4b400;                  /* warm highlight (like Jekyll theme) */
 }
 
-/* Shrunken navbar when user scrolls */
-.nav-shrink {
-  padding: 4px 0 !important;
-  border-radius: 12px !important;
+/* Optional: add subtle bottom border or shadow */
+nav {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* When nav is shrunk, reduce the link padding and font-size too */
-nav.nav-shrink ul li a,
-nav .nav-shrink ul li a {
-  padding: 0.28em 0.6em !important;
-  font-size: 0.92em !important;
-}
+
+
 
 /* page main container to control layout */
 main { max-width: 1100px; margin: 24px auto; padding: 0 20px; }
@@ -181,7 +171,7 @@ img {
   max-width: 900px; /* but never exceed this */
   min-width: 300px;
   height: auto;
-  margin: 1.5rem auto;
+  margin: 15px;
   display: block;
 }
 .img-small {
@@ -261,3 +251,24 @@ details.day[open] summary { transform: translateY(1px); box-shadow: 0 6px 18px r
   .trip-link { padding: 14px 16px; font-size: 1rem; width: 94%; }
 }
   
+.post-header {
+  position: relative;
+  width: 100%;
+  height: 85vh; /* adjust to your liking */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  text-align: center;
+}
+
+.post-header .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* dark overlay for readability */
+}
+
+.post-header .header-content {
+  position: relative;
+  z-index: 2;
+}

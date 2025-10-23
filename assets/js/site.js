@@ -63,14 +63,4 @@
   if (lbImg) lbImg.addEventListener('click', () => { inner && inner.classList.toggle('zoomed'); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
-  // Nav shrink behavior
-  const nav = document.querySelector('nav');
-  function onScroll() {
-    if (!nav) return;
-    if (window.scrollY > 60) nav.classList.add('nav-shrink');
-    else nav.classList.remove('nav-shrink');
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
 })();
