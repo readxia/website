@@ -11,7 +11,7 @@ body {
   background: linear-gradient(180deg,#0f1724 0%, #1f2937 100%);
   background-attachment: fixed;
   color: #fff;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Lexend Deca", sans-serif;
   text-align: center;
 }
   
@@ -39,7 +39,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: inherit;
+    font-family: "Lexend Deca", sans-serif;
   }
   
   button:hover {
@@ -91,8 +91,8 @@ nav ul li a:hover {
 
 /* Shrunken navbar when user scrolls */
 .nav-shrink {
-  padding: 2px 0 !important;
-  border-radius: 2px !important;
+  padding: 4px 0 !important;
+  border-radius: 12px !important;
 }
 
 /* When nav is shrunk, reduce the link padding and font-size too */
