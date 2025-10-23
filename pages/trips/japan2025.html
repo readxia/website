@@ -38,7 +38,7 @@
     <summary>Day 2 — Nature & Hot Springs</summary>
     <p>Visited a hot spring and some scenic places.</p>
     <div class="img-row">
-  <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="../assets/thumbnails/hotelselfiethumbnail.webp" alt="Scenic view" loading="lazy">
+  <img class="img-small lightbox-trigger" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="../assets/japan2025/thumbnails/hotelselfiethumbnail.webp" alt="Scenic view" loading="lazy">
   <img class="img-small lightbox-trigger" src="../assets/japan2025/thumbnails/hotelselfiethumbnail.webp" data-src="https://i.ibb.co/XYZ/japan-small2.jpg" alt="Hot spring" loading="lazy">
     </div>
   </details>
@@ -103,19 +103,29 @@
         });
       });
 
-      lbClose.addEventListener('click', close);
-      backdrop.addEventListener('click', close);
+      lbClose.addEventListener('click', function(){
+        // reset zoom when closing
+        document.getElementById('lightbox-inner').classList.remove('zoomed');
+        close();
+      });
+      backdrop.addEventListener('click', function(){ document.getElementById('lightbox-inner').classList.remove('zoomed'); close(); });
       lbImg.addEventListener('click', function(){
-        const isZoomed = lbImg.dataset.zoomed === 'true';
-        if(!isZoomed){
-          lbImg.dataset.zoomed = 'true';
-          lbImg.style.width = Math.min(lbImg.naturalWidth, window.innerWidth * 2) + 'px';
-        } else {
-          lbImg.dataset.zoomed = 'false';
-          lbImg.style.width = '';
-        }
+        const inner = document.getElementById('lightbox-inner');
+        inner.classList.toggle('zoomed');
       });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    })();
+  </script>
+  <script>
+    // Navbar shrink on scroll
+    (function(){
+      const nav = document.querySelector('nav');
+      function onScroll(){
+        if(window.scrollY > 60) nav.classList.add('nav-shrink');
+        else nav.classList.remove('nav-shrink');
+      }
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
     })();
   </script>
 </body>
