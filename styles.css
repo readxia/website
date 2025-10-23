@@ -1,0 +1,255 @@
+body {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content towards the top */
+  align-items: center; /* Center content horizontally */
+  /* dark neutral gray with a blue hint */
+  background: linear-gradient(180deg,#0f1724 0%, #1f2937 100%);
+  background-attachment: fixed;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+}
+  
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+  }
+  
+  p {
+    font-size: 1.2rem;
+    /* width similar to .img-large on wide screens */
+    width: min(50vw, 900px);
+    max-width: 90ch;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+  }
+  
+  button {
+    background: #fff;
+    color: #2a5298;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+  
+  button:hover {
+    background: #2a5298;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+  }
+
+  nav {
+    position: sticky;
+    top: 18px;
+    background-color: rgba(51,51,51,0.9); /* semi-transparent dark */
+    z-index: 1000; /* Ensure it stays above other elements */
+    padding: 8px 0; /* Add some padding for spacing */
+    width: calc(100% - 48px);
+    border-radius: 12px;
+    margin: 0 24px 18px 24px; /* centered with side margins */
+    backdrop-filter: blur(6px);
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
+}
+
+nav ul li {
+  flex: 1; /* Make each item take up an equal amount of space */
+  text-align: center; /* Center the text inside each section */
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.6em 1.2em; /* Use relative units for padding */
+  font-size: 1.05em; /* Scale font size relative to the navbar */
+  display: block;
+  text-align: center; /* Center the text inside the button */
+}
+
+nav ul li a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+/* Shrunken navbar when user scrolls */
+.nav-shrink {
+  padding: 2px 0 !important;
+  border-radius: 2px !important;
+}
+
+/* page main container to control layout */
+main { max-width: 1100px; margin: 24px auto; padding: 0 20px; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 1rem 0;
+  display: block;
+}
+/* Lightbox styles */
+#lightbox {
+  display: none; /* shown via JS */
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+#lightbox[aria-hidden="false"] {
+  display: flex;
+}
+#lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(4px);
+}
+#lightbox-img {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 3002;
+}
+
+/* inner wrapper so zoomed images can be panned (scroll) */
+#lightbox-inner {
+  z-index: 3002;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow: auto;
+  border-radius: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+#lightbox-inner { display:flex; justify-content:center; align-items:center }
+#lightbox-img { cursor: zoom-in; max-width:100%; height:auto; transition: transform 240ms ease; }
+#lightbox-inner.zoomed { cursor: zoom-out; }
+#lightbox-inner.zoomed #lightbox-img { transform: scale(2); }
+#lightbox-close {
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+  z-index: 3003;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  color: #222;
+  font-size: 1.1rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+#lightbox-close:hover { transform: scale(1.05); }
+
+@media (max-width: 600px) {
+  #lightbox-img { max-width: 95vw; max-height: 80vh; }
+  #lightbox-close { right: 0.75rem; top: 0.75rem; padding: 5px 8px; }
+}
+/* Image utility classes for the travel blog */
+.img-large {
+  width: 50vw; /* large images take ~50% of viewport width */
+  max-width: 900px; /* but never exceed this */
+  min-width: 300px;
+  height: auto;
+  margin: 1.5rem auto;
+  display: block;
+}
+.img-small {
+  width: calc(50vw / 2); /* about half the large image width */
+  max-width: 420px;
+  min-width: 140px;
+  height: auto;
+  display: block;
+  margin: 0.75rem;
+}
+.img-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 0.5rem 0 1.5rem;
+}
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .img-large { width: 80vw; max-width: 800px; min-width: 0; }
+  .img-small { width: 40vw; max-width: 360px; }
+}
+@media (max-width: 480px) {
+  .img-row { flex-direction: column; align-items: center; }
+  .img-small { width: 80%; margin: 0.5rem 0; }
+}
+
+/* Big, clickable summary (dropdown) styles */
+details.day summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 18px;
+  background: linear-gradient(90deg,#2a5298,#1e3c72);
+  color: white;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 1rem auto;
+  max-width: 900px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  display: inline-block;
+}
+details.day summary::-webkit-details-marker { display:none; }
+details.day[open] summary { transform: translateY(1px); box-shadow: 0 6px 18px rgba(0,0,0,0.3) inset; }
+
+/* Make the summary responsive on small screens */
+@media (max-width: 600px) {
+  details.day summary { width: 92%; padding: 12px 14px; font-size: 1rem; }
+}
+
+/* Trip list link styles */
+.trip-list { display: flex; flex-direction: column; gap: 14px; align-items: center; margin-top: 20px; }
+.trip-link {
+  display: inline-block;
+  width: 90%;
+  max-width: 720px;
+  text-align: center;
+  padding: 18px 20px;
+  background: linear-gradient(90deg,#ffffff, #f0f0f5);
+  color: #1e3c72;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.trip-link:hover, .trip-link:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+  outline: none;
+}
+.trip-link:active { transform: translateY(-1px) scale(0.995); }
+
+@media (max-width: 480px) {
+  .trip-link { padding: 14px 16px; font-size: 1rem; width: 94%; }
+}
+  
