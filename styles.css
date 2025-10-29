@@ -1,5 +1,5 @@
 body {
-  padding-top: 60px;
+  padding-top: 0px;
   padding-bottom: 100px;
   margin: 0;
   min-height: 100vh;
@@ -11,7 +11,10 @@ body {
   background: linear-gradient(180deg,#0f1724 0%, #1f2937 100%);
   background-attachment: fixed;
   color: #fff;
-  font-family: "Lexend Deca", sans-serif;
+  font-family: "Georgia", "Times New Roman", Times, serif;
+
+  /* ensure children inherit the serif choice unless overridden */
+  text-rendering: optimizeLegibility;
   text-align: center;
 }
   
@@ -39,7 +42,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: "Lexend Deca", sans-serif;
+    font-family: Georgia, serif;
   }
   
   button:hover {
@@ -50,15 +53,14 @@ body {
   }
 
 nav {
-  background-color: #222;          /* dark theme background */
   color: #fff;                     /* white text */
   padding: 0.75rem 2rem;           /* space around links */
   display: flex;
   justify-content: center;         /* center the <ul> */
   align-items: center;
-  top: 0;
+  position: static;                /* sits at top but scrolls with page */
   width: 100%;
-  z-index: 1000;                   /* stay above images */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 /* Remove list styles */
@@ -75,18 +77,36 @@ nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1rem;
   transition: color 0.2s ease;
 }
+/* ensure nav links use the site font unless you intentionally set another */
+nav a { font-family: inherit; }
 
 /* Hover and active effects */
 nav a:hover {
   color: #f4b400;                  /* warm highlight (like Jekyll theme) */
 }
 
-/* Optional: add subtle bottom border or shadow */
-nav {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+nav .logo {
+  left: 50%;
+  transform: translateX(-50%) translateY(-20%);
+  display: flex;
+  align-items: center;
+  margin: 0 2rem;
+  z-index: 1; /* make sure it sits above links */
+}
+
+nav .logo img {
+  height: 60px;
+  width: auto;
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+.nav-right {
+  justify-content: flex-end;
 }
 
 
