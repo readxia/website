@@ -32,12 +32,54 @@
   document.addEventListener('click', function (e) {
     const trigger = e.target.closest && e.target.closest('.lightbox-trigger');
     if (!trigger) return;
-    // load real src if using data-src placeholder
-    if (trigger.dataset && trigger.dataset.src && (!trigger.src || trigger.src.startsWith('data:image/gif'))) {
-      trigger.src = trigger.dataset.src;
-      trigger.removeAttribute('data-src');
+
+    // Helper to preload an image and resolve with the Image element
+    function preload(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('failed'));
+        img.src = url;
+      });
     }
-    openLightbox(trigger.src, trigger.alt);
+
+    // Build a list of candidate URLs to try, preferring any data-src
+    const raw = (trigger.dataset && trigger.dataset.src) || trigger.src || '';
+    const candidates = [];
+    if (raw) candidates.push(raw);
+    try {
+      if (raw.includes('/thumbnails/')) {
+        candidates.push(raw.replace('/thumbnails/', '/'));
+      }
+      const noThumb = raw.replace(/thumbnail/gi, '');
+      if (noThumb !== raw) candidates.push(noThumb);
+    } catch (err) {
+      // ignore
+    }
+
+    // Try candidates in order until we find one whose naturalWidth is reasonably large
+    (async function tryCandidates() {
+      for (const c of candidates) {
+        try {
+          const img = await preload(c);
+          if (img.naturalWidth >= 400 || img.naturalHeight >= 300) {
+            try { trigger.src = c; } catch (err) {}
+            trigger.removeAttribute('data-src');
+            openLightbox(c, trigger.alt);
+            return;
+          }
+        } catch (err) {
+          // preload failed, try next
+        }
+      }
+      // Fallback to first candidate or existing src
+      const fallback = candidates[0] || trigger.src;
+      if (fallback && trigger.dataset && trigger.dataset.src) {
+        try { trigger.src = fallback; } catch (err) {}
+        trigger.removeAttribute('data-src');
+      }
+      openLightbox(fallback, trigger.alt);
+    })();
   });
 
   // Lazy-load images inside a day when the <details> is opened
