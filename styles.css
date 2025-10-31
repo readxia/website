@@ -10,7 +10,7 @@ body {
   /* dark neutral gray with a blue hint */
   background: #191b1b;
   background-attachment: fixed;
-  color: #fff;
+  color: #CDCAC5;
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -22,17 +22,13 @@ body {
 }
   
   h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(210, 210, 210, 0.8);
+    font-size: 3rem;
+    padding-bottom: 0px;
   }
 
   h2 {
     font-size: 1.5rem;
-    margin-bottom: 15px;
-    text-shadow: 0 0 8px rgba(180, 180, 180, 0.7);
     text-align: center;
-    color:#f4b400;
     width: min(35vw, 900px);
   }
 
@@ -53,20 +49,13 @@ body {
     line-height: 1.6;
     text-align: left;
   }
-  
-  button {
-    background: #fff;
-    color: #2a5298;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 800;
-    font-style: normal;
+
+  .caption {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-style: italic;
   }
   
   button:hover {
@@ -79,7 +68,7 @@ body {
   .logo {
     height: 100px;
     width: auto;
-    transition: all 0.3s ease;
+    
   }
 
 .logo:hover {
@@ -89,12 +78,12 @@ body {
 nav {
   color: #fff;                     /* white text */
   /* padding: 0.75rem 2rem;           space around links */
-  padding-bottom: 0.75rem;
+  /* padding-bottom: 0.75rem; */
   display: flex;
   justify-content: center;         /* center the <ul> */
   align-items: center;
   position: static;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-bottom: 1.25px solid #222;
   width: 100%;
 }
 .nav-items {
@@ -109,7 +98,7 @@ nav {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .nav-items li a:hover {
@@ -125,6 +114,12 @@ img {
   border-radius: 10px;
   margin: 1rem 0;
   display: block;
+}
+img.vertical {
+  max-height: 500px;
+  width: auto;
+  display: block;
+  margin: 15px auto;
 }
 /* Lightbox styles */
 #lightbox {
@@ -191,7 +186,7 @@ img {
 }
 /* Image utility classes for the travel blog */
 .img-large {
-  width: 50vw; /* large images take ~50% of viewport width */
+  width: 35vw; /* large images take ~50% of viewport width */
   max-width: 900px; /* but never exceed this */
   min-width: 300px;
   height: auto;
@@ -199,7 +194,7 @@ img {
   display: block;
 }
 .img-small {
-  width: calc(50vw / 2); /* about half the large image width */
+  width: calc(35vw / 2); /* about half the large image width */
   max-width: 420px;
   min-width: 140px;
   height: auto;
