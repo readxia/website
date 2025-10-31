@@ -8,29 +8,50 @@ body {
   justify-content: flex-start; /* Align content towards the top */
   align-items: center; /* Center content horizontally */
   /* dark neutral gray with a blue hint */
-  background: linear-gradient(180deg,#0f1724 0%, #1f2937 100%);
+  background: #191b1b;
   background-attachment: fixed;
   color: #fff;
-  font-family: "Georgia", "Times New Roman", Times, serif;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 
   /* ensure children inherit the serif choice unless overridden */
   text-rendering: optimizeLegibility;
-  text-align: center;
+  text-align: left;
 }
   
   h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 20px;
     text-shadow: 0 0 10px rgba(210, 210, 210, 0.8);
   }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(180, 180, 180, 0.7);
+    text-align: center;
+    color:#f4b400;
+    width: min(35vw, 900px);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    text-shadow: 0 0 6px rgba(160, 160, 160, 0.6);
+    text-align: left;
+    width: min(35vw, 900px);
+  }
   
   p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     /* width similar to .img-large on wide screens */
-    width: min(50vw, 900px);
+    width: min(35vw, 900px);
     max-width: 90ch;
     margin: 15px;
     line-height: 1.6;
+    text-align: left;
   }
   
   button {
@@ -42,7 +63,10 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: Georgia, serif;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
   }
   
   button:hover {
@@ -51,66 +75,46 @@ body {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(255,255,255,0.6);
   }
+  
+  .logo {
+    height: 100px;
+    width: auto;
+    transition: all 0.3s ease;
+  }
+
+.logo:hover {
+  content: url("assets/logo_hover.png"); /* use the hover version here */
+}
 
 nav {
   color: #fff;                     /* white text */
-  padding: 0.75rem 2rem;           /* space around links */
+  /* padding: 0.75rem 2rem;           space around links */
+  padding-bottom: 0.75rem;
   display: flex;
   justify-content: center;         /* center the <ul> */
   align-items: center;
-  position: static;                /* sits at top but scrolls with page */
-  width: 100%;
+  position: static;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  width: 100%;
 }
-
-/* Remove list styles */
-nav ul {
-  list-style: none;
+.nav-items {
   display: flex;
-  gap: 3rem;                       /* space between links */
+  gap: 2rem; /* space between items */
+  align-items: center;
+  list-style: none;
   margin: 0;
   padding: 0;
 }
-
-/* Link styles */
-nav a {
+.nav-items li a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
-  transition: color 0.2s ease;
-}
-/* ensure nav links use the site font unless you intentionally set another */
-nav a { font-family: inherit; }
-
-/* Hover and active effects */
-nav a:hover {
-  color: #f4b400;                  /* warm highlight (like Jekyll theme) */
 }
 
-nav .logo {
-  left: 50%;
-  transform: translateX(-50%) translateY(-20%);
-  display: flex;
-  align-items: center;
-  margin: 0 2rem;
-  z-index: 1; /* make sure it sits above links */
+.nav-items li a:hover {
+  color: #f4b400;
 }
-
-nav .logo img {
-  height: 60px;
-  width: auto;
-}
-
-.nav-left {
-  justify-content: flex-start;
-}
-.nav-right {
-  justify-content: flex-end;
-}
-
-
-
 
 /* page main container to control layout */
 main { max-width: 1100px; margin: 24px auto; padding: 0 20px; }
