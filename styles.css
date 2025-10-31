@@ -50,6 +50,11 @@ body {
     text-align: left;
   }
 
+  .intro {
+    font-weight: 600;
+    font-style: italic;
+  }
+
   .caption {
     font-size: 0.9rem;
     text-align: center;
