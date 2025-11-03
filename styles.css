@@ -80,6 +80,10 @@ body {
   content: url("assets/logo_hover.png"); /* use the hover version here */
 }
 
+a {
+  color: rgb(120, 212, 255);
+}
+
 nav {
   color: #fff;                     /* white text */
   /* padding: 0.75rem 2rem;           space around links */
