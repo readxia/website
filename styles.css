@@ -22,30 +22,27 @@ body {
 }
   
   h1 {
-    font-size: 3rem;
-    padding-bottom: 0px;
+    font-size: 2.25rem;
+    margin: 0 0 12px 0;
+    line-height: 1.1;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     text-align: center;
-    width: min(35vw, 900px);
+    margin: 6px 0 14px 0;
   }
 
   h3 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-    text-shadow: 0 0 6px rgba(160, 160, 160, 0.6);
+    font-size: 1.15rem;
+    margin: 0 0 12px 0;
+    text-shadow: 0 0 6px rgba(160,160,160,0.6);
     text-align: left;
-    width: min(35vw, 900px);
   }
   
   p {
     font-size: 1rem;
-    /* width similar to .img-large on wide screens */
-    width: min(35vw, 900px);
-    max-width: 90ch;
-    margin: 15px;
+    margin: 12px 0;
     line-height: 1.6;
     text-align: left;
   }
@@ -114,8 +111,41 @@ nav {
   color: #f4b400;
 }
 
-/* page main container to control layout */
-main { max-width: 1100px; margin: 24px auto; padding: 0 20px; }
+/* page main container: single-column content centered with a max width of 700px */
+main {
+  max-width: 700px;
+  width: calc(100% - 32px);
+  margin: 28px auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Constrain common post elements into a centered column that is at most 40% of the viewport */
+/* This targets the elements you described: p, .caption, .intro, .img-large, .img-row, .img-small and .vertical */
+p, .caption, .intro, .img-large, .img-row, .img-small, .vertical {
+  /* prefer 40% of viewport but don't grow past 700px */
+  max-width: min(40vw, 700px);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Keep small images sized by flex inside the constrained column */
+.img-row { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.img-small { flex: 1 1 48%; max-width:48%; }
+
+/* On narrow screens make the column full-width so content is legible */
+@media (max-width: 700px) {
+  p, .caption, .intro, .img-large, .img-row, .img-small, .vertical {
+    max-width: calc(100% - 32px);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .img-row { flex-direction: column; gap:10px; }
+  .img-small { max-width: 100%; flex-basis: 100%; }
+}
 
 img {
   max-width: 100%;
@@ -195,28 +225,30 @@ img.vertical {
 }
 /* Image utility classes for the travel blog */
 .img-large {
-  width: 35vw; /* large images take ~50% of viewport width */
-  max-width: 900px; /* but never exceed this */
-  min-width: 300px;
+  width: 100%;
+  max-width: min(40vw, 700px); /* keep within the column width */
   height: auto;
-  margin: 15px;
+  margin: 16px auto; /* center */
   display: block;
-}
-.img-small {
-  width: calc(35vw / 2); /* about half the large image width */
-  max-width: 420px;
-  min-width: 140px;
-  height: auto;
-  display: block;
-  margin: 0.75rem;
+  border-radius: 8px;
 }
 .img-row {
   display: flex;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
   align-items: flex-start;
-  margin: 0.5rem 0 1.5rem;
+  justify-content: center; /* center the row inside the column */
+  margin: 8px auto 16px;
+  width: 100%;
+  max-width: min(40vw, 700px);
+}
+.img-small {
+  flex: 1 1 48%;
+  max-width: 48%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
 }
 /* Responsive adjustments */
 @media (max-width: 900px) {
@@ -226,6 +258,21 @@ img.vertical {
 @media (max-width: 480px) {
   .img-row { flex-direction: column; align-items: center; }
   .img-small { width: 80%; margin: 0.5rem 0; }
+
+/* vertical (tall) images should fit the column width but preserve aspect */
+.vertical { width: 100%; height: auto; display: block; margin: 12px 0; }
+
+@media (min-width: 700px) {
+  /* on wider screens keep small images side-by-side inside the column */
+  .img-small { flex-basis: 48%; }
+}
+
+@media (max-width: 480px) {
+  /* mobile: column layout, images full width */
+  main { width: calc(100% - 24px); padding: 0 12px; }
+  .img-small { flex-basis: 100%; max-width: 100%; }
+  h1 { font-size: 1.75rem; }
+}
 }
 
 /* Big, clickable summary (dropdown) styles */
