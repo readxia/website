@@ -28,6 +28,18 @@
     document.body.style.overflow = '';
   }
 
+  // Add placeholder src to lazy images that only have data-src (keeps HTML unchanged but ensures a visible placeholder)
+  // This mirrors adding src="assets/loading.webp" to tags and runs early because this script is loaded with `defer`.
+  try {
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      if (!img.hasAttribute('src') || img.getAttribute('src') === '') {
+        img.src = 'assets/loading.webp';
+      }
+    });
+  } catch (err) {
+    // ignore
+  }
+
   // Delegated click for lightbox triggers
   document.addEventListener('click', function (e) {
     const trigger = e.target.closest && e.target.closest('.lightbox-trigger');
